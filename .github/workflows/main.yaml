@@ -54,6 +54,7 @@ jobs:
       - uses: azure/docker-login@v1
         with:
           login-server: acrforctooffice.azurecr.io
+          registry: acrforctooffice.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_USERNAME }}
 

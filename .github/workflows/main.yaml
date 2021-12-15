@@ -46,19 +46,10 @@ jobs:
       - name: download java tracer
         run: wget --no-check-certificate  -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/download/v0.91.0/dd-java-agent.jar'
 
+      - run: mv dd-java-agent.jar ./target
+
       - name: list current directory
         run: ls -lah
-
-      # Build docker image for service
-      - name: Build docker image
-        uses: docker/build-push-action@v1
-        with:
-          push: false
-          dockerfile: docker/orders/Dockerfile.github
-          repository: ${{ env.GROUP }}/${{ env.REPO }}
-          tag_with_ref: true
-          tag_with_sha: true
-          tags: ${{ github.sha }}
 
       - uses: azure/docker-login@v1
         with:
@@ -66,9 +57,13 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - run: |
-          docker build . -t acrforctooffice.azurecr.io/orders:${{ github.sha }}
-          docker push contoso.azurecr.io/orders:${{ github.sha }}
+      # Build docker image for service
+      - name: Build and push docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          file: docker/orders/Dockerfile.github
+          tags: ${{ github.sha }}
 
       # Build docker image for mock service
       # - name: Build mock docker image

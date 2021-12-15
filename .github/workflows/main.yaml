@@ -55,7 +55,14 @@ jobs:
         with:
           login-server: acrforctooffice.azurecr.io
           username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
+          password: ${{ secrets.ACR_USERNAME }}
+
+      - name: Login to Azure Container Registry
+        uses: docker/login-action@v1 
+        with:
+          registry: acrforctooffice.azurecr.io
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_USERNAME }}
 
       # Build docker image for service
       - name: Build and push docker image
@@ -63,7 +70,10 @@ jobs:
         with:
           push: true
           file: docker/orders/Dockerfile.github
-          tags: ${{ github.sha }}
+          tags: |
+            orders:latest
+            orders:1.0.0
+            acrforctooffice.azurecr.io/orders:latest
 
       # Build docker image for mock service
       # - name: Build mock docker image

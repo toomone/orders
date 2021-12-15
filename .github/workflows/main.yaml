@@ -46,10 +46,11 @@ jobs:
       - name: download java tracer
         run: wget --no-check-certificate  -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/download/v0.91.0/dd-java-agent.jar'
 
-      - run: mv dd-java-agent.jar ./target
-
       - name: list current directory
         run: ls -lah
+
+      - name: list target directory
+        run: ls -lah target
 
       - uses: azure/docker-login@v1
         with:

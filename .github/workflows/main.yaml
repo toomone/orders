@@ -68,11 +68,10 @@ jobs:
       - name: Build and push docker image
         uses: docker/build-push-action@v2
         with:
+          context: .
           push: true
           file: docker/orders/Dockerfile.github
           tags: |
-            orders:latest
-            orders:1.0.0
             acrforctooffice.azurecr.io/orders:latest
             acrforctooffice.azurecr.io/orders:1.0.0
 

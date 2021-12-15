@@ -46,6 +46,9 @@ jobs:
       - name: download java tracer
         run: wget --no-check-certificate  -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/download/v0.91.0/dd-java-agent.jar'
 
+      - name: print current directory
+        run: pwd
+
       - name: list current directory
         run: ls -lah
 

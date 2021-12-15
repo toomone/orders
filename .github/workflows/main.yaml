@@ -74,6 +74,7 @@ jobs:
             orders:latest
             orders:1.0.0
             acrforctooffice.azurecr.io/orders:latest
+            acrforctooffice.azurecr.io/orders:1.0.0
 
       # Build docker image for mock service
       # - name: Build mock docker image

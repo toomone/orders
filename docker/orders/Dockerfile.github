@@ -3,8 +3,6 @@ FROM weaveworksdemos/msd-java:jre-latest
 WORKDIR /usr/src/app
 COPY target/*.jar ./app.jar
 
-RUN wget --no-check-certificate  -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/download/v0.91.0/dd-java-agent.jar'
-
 RUN	chown -R ${SERVICE_USER}:${SERVICE_GROUP} ./app.jar
  
 USER ${SERVICE_USER}

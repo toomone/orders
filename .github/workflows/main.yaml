@@ -43,6 +43,12 @@ jobs:
       - name: Integration Tests
         run: mvn integration-test
 
+      - name: download java tracer
+        run: wget --no-check-certificate  -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/download/v0.91.0/dd-java-agent.jar'
+
+      - name: list current directory
+        run: ls -lah
+
       # Build docker image for service
       - name: Build docker image
         uses: docker/build-push-action@v1

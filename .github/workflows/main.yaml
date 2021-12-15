@@ -37,11 +37,11 @@ jobs:
       - name: Build with Maven
         run: mvn -B -DskipTests package --file pom.xml
 
-      - name: Unit Tests
-        run: mvn -q test
+      # - name: Unit Tests
+      #   run: mvn -q test
 
-      - name: Integration Tests
-        run: mvn integration-test
+      # - name: Integration Tests
+      #   run: mvn integration-test
 
       - name: download java tracer
         run: wget --no-check-certificate  -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/download/v0.91.0/dd-java-agent.jar'
@@ -57,12 +57,12 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_USERNAME }}
 
-      - name: Login to Azure Container Registry
-        uses: docker/login-action@v1 
-        with:
-          registry: acrforctooffice.azurecr.io
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_USERNAME }}
+      # - name: Login to Azure Container Registry
+      #   uses: docker/login-action@v1 
+      #   with:
+      #     registry: acrforctooffice.azurecr.io
+      #     username: ${{ secrets.ACR_USERNAME }}
+      #     password: ${{ secrets.ACR_USERNAME }}
 
       # Build docker image for service
       - name: Build and push docker image

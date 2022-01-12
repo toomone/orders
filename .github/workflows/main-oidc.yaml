@@ -15,6 +15,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: dev
     env:
       GROUP: weaveworksdemos
       COMMIT: ${{ github.sha }}

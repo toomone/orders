@@ -38,6 +38,9 @@ jobs:
       - run: docker build . -f docker/orders/Dockerfile.github -t acrforctooffice.azurecr.io/orders:${{ github.sha }}
         
       - uses: Azure/container-scan@v0
+        name: Scan image for vulnerabilities
+        id: container-scan
+        continue-on-error: true      
         with:
           image-name: acrforctooffice.azurecr.io/orders:${{ github.sha }}
 
@@ -52,5 +55,12 @@ jobs:
         run: az acr login --name acrforctooffice
 
       - run: docker push acrforctooffice.azurecr.io/orders:${{ github.sha }}
+
+      - name: Post logs to appinsights
+        uses: Azure/publish-security-assessments@v0
+        with: 
+          scan-results-path: ${{ steps.container-scan.outputs.scan-report-path }}
+          connection-string: ${{ secrets.AZ_APPINSIGHTS_CONNECTION_STRING }}
+          subscription-token: ${{ secrets.AZ_SUBSCRIPTION_TOKEN }}       
 
 

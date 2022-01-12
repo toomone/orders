@@ -35,7 +35,7 @@ jobs:
       - name: download java tracer
         run: wget --no-check-certificate  -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/download/v0.91.0/dd-java-agent.jar'
 
-      - run: docker build . -t acrforctooffice.azurecr.io/orders:${{ github.sha }}
+      - run: docker build . -f docker/orders/Dockerfile.github -t acrforctooffice.azurecr.io/orders:${{ github.sha }}
         
       - uses: Azure/container-scan@v0
         with:

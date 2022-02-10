@@ -4,7 +4,7 @@
 # orders
 A microservices-demo service that provides ordering capabilities. It is sub part of the sockshop ecommerce webservices.
 
-This build is built, tested and released by GitHub Action and deploy to Azure Kubernetes Service.
+This build is built, tested and released by GitHub Action and deploy to Azure Kubernetes Service (AKS).
 
 # API Spec
 

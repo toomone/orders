@@ -85,6 +85,8 @@ jobs:
       - name: Deploy
         run: echo I am deploying! 
 
+      - uses: actions/checkout@v2
+
       - name: 'Az CLI login'
         uses: azure/login@v1
         with:

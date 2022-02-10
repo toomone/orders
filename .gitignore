@@ -117,3 +117,4 @@ weave-ecs-demo-key.pem
 
 # Ignore jar files
 orders.jar
+.venv

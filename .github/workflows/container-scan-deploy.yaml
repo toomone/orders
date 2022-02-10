@@ -14,6 +14,9 @@ permissions:
 env:
   NAMESPACE: bbl-amadeus
   REGISTRY_NAME: acrforctooffice.azurecr.io
+  CLUSTER_NAME: akscluster
+  CLUSTER_RESOURCE_GROUP: ctooffice
+  APP_NAME: orders
 
 jobs:
 
@@ -81,6 +84,12 @@ jobs:
     steps:
       - name: Deploy
         run: echo I am deploying! 
+
+    # Set the target Azure Kubernetes Service (AKS) cluster. 
+      - uses: azure/aks-set-context@v1
+        with:
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
 
         # Create namespace if doesn't exist
       - run: |

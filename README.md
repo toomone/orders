@@ -4,7 +4,7 @@
 # orders
 A microservices-demo service that provides ordering capabilities.
 
-This build is built, tested and released by travis.
+This build is built, tested and released by GitHub Action.
 
 # API Spec
 

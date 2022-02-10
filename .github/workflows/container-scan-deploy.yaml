@@ -1,6 +1,11 @@
-name: 🏭 Build, 🔐 Scan and 🛫 deploy 
+name: 🏭 Build,🔍 scan and 🛫 deploy 
 
-on: workflow_dispatch 
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -9,6 +14,9 @@ permissions:
 env:
   NAMESPACE: bbl-amadeus
   REGISTRY_NAME: acrforctooffice.azurecr.io
+  CLUSTER_NAME: akscluster
+  CLUSTER_RESOURCE_GROUP: ctooffice
+  APP_NAME: orders
 
 jobs:
 
@@ -77,7 +85,22 @@ jobs:
       - name: Deploy
         run: echo I am deploying! 
 
-        # Create namespace if doesn't exist
+      - uses: actions/checkout@v2
+
+      - name: 'Az CLI login'
+        uses: azure/login@v1
+        with:
+            client-id: ${{ secrets.AZURE_CLIENT_ID }}
+            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # Set the target Azure Kubernetes Service (AKS) cluster. 
+      - uses: azure/aks-set-context@v2.0
+        with:
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+
+      # Create namespace if doesn't exist
       - run: |
           kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -  
 
@@ -94,7 +117,7 @@ jobs:
 
   DeployStaging:
     name: 🛵 Deploy to Staging 
-    if: github.event.ref == 'refs/heads/main'
+    if: github.event.ref == 'refs/heads/master'
     needs: [Build]
     runs-on: ubuntu-latest
     environment: 

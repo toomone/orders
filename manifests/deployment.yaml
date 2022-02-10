@@ -4,12 +4,9 @@ kind: Deployment
 metadata:
   name: orders
   labels:
-    name: orders
-    tags.datadoghq.com/env: "demo"
-    tags.datadoghq.com/service: "orders"
-    tags.datadoghq.com/version: "0.1"    
+    name: orders  
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       name: orders
@@ -17,34 +14,11 @@ spec:
     metadata:
       labels:
         name: orders
-        tags.datadoghq.com/env: "demo"
-        tags.datadoghq.com/service: "orders"
-        tags.datadoghq.com/version: "0.1"  
     spec:
       containers:
       - name: orders
         image: acrforctooffice.azurecr.io/orders:latest
-        env:
-         - name: DD_AGENT_HOST
-           valueFrom:
-             fieldRef:
-               fieldPath: status.hostIP
-         - name: DD_ENV
-           valueFrom:
-             fieldRef:
-               fieldPath: metadata.labels['tags.datadoghq.com/env']
-         - name: DD_SERVICE
-           valueFrom:
-             fieldRef:
-               fieldPath: metadata.labels['tags.datadoghq.com/service']
-         - name: DD_VERSION
-           valueFrom:
-             fieldRef:
-               fieldPath: metadata.labels['tags.datadoghq.com/version']
-         - name: DD_PROFILING_ENABLED
-           value: "true"
-         - name: DD_LOGS_INJECTION
-           value: "true"        
+        env:    
          - name: ZIPKIN
            value: zipkin.jaeger.svc.cluster.local
          - name: JAVA_OPTS
@@ -70,18 +44,6 @@ spec:
         volumeMounts:
         - mountPath: /tmp
           name: tmp-volume
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 300
-          periodSeconds: 3
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 180
-          periodSeconds: 3
       volumes:
         - name: tmp-volume
           emptyDir:

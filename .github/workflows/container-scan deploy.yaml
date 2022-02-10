@@ -7,12 +7,12 @@ permissions:
       contents: read
 
 jobs:
-  🏭 build:
+  build:
 
     runs-on: ubuntu-latest
     environment: dev
     env:
-      GROUP: weaveworksdemos
+      GROUP: githubactionsdemos
       COMMIT: ${{ github.sha }}
       REPO: orders
     steps:

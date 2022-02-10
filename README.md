@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/microservices-demo/orders.svg?branch=master)](https://travis-ci.org/microservices-demo/orders) [![Coverage Status](https://coveralls.io/repos/github/microservices-demo/orders/badge.svg?branch=master)](https://coveralls.io/github/microservices-demo/orders?branch=master)
+ [![Coverage Status](https://coveralls.io/repos/github/microservices-demo/orders/badge.svg?branch=master)](https://coveralls.io/github/microservices-demo/orders?branch=master)
 [![](https://images.microbadger.com/badges/image/weaveworksdemos/orders.svg)](http://microbadger.com/images/weaveworksdemos/orders "Get your own image badge on microbadger.com")[![CodeQL](https://github.com/toomone/orders/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/toomone/orders/actions/workflows/codeql-analysis.yml)
 
 # orders

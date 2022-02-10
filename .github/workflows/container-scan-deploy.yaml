@@ -86,7 +86,7 @@ jobs:
         run: echo I am deploying! 
 
     # Set the target Azure Kubernetes Service (AKS) cluster. 
-      - uses: azure/aks-set-context@v2
+      - uses: azure/aks-set-context@v2.0
         with:
           cluster-name: ${{ env.CLUSTER_NAME }}
           resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}

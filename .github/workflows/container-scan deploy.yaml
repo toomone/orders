@@ -1,4 +1,4 @@
-name: Build and container scan 
+name: 🏭 Build and 🔐container scan 
 
 on: workflow_dispatch 
 
@@ -7,7 +7,8 @@ permissions:
       contents: read
 
 jobs:
-  build:
+  🏭 build:
+
     runs-on: ubuntu-latest
     environment: dev
     env:

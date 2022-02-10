@@ -1,6 +1,11 @@
 name: 🏭 Build, 🔐 Scan and 🛫 deploy 
 
-on: workflow_dispatch 
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
 
 permissions:
   id-token: write
